@@ -28,6 +28,8 @@ function App() {
     client.models.Todo.delete({ id })
   }
 
+  console.log("tools", tools)
+
   return (
     <main>
       <h1>{user?.signInDetails?.loginId}'s todos</h1>
