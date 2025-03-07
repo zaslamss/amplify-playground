@@ -7,11 +7,16 @@ const client = generateClient<Schema>();
 
 function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [tools, setTools] = useState<Array<Schema["Tools"]["type"]>>([]);
+
   const { user, signOut } = useAuthenticator();
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
+    });
+    client.models.Tools.observeQuery().subscribe({
+      next: (data) => setTools([...data.items]),
     });
   }, []);
 
