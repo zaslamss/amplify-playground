@@ -10,18 +10,15 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
-  Tools: a
-    .model({
-      id: a.id(),
-      name: a.string(),
-      description: a.string(),
-      url: a.string(),
-      public: a.boolean(),
-      usage: a.integer(),
-    })
-    .authorization((allow) => [allow.publicApiKey()])
+      isDone: a.boolean(),
+    }).authorization(allow => [allow.owner()]),
+  Tool: a
+  .model({
+    id: a.id(),
+    name: a.string(),
+    slug: a.string(),
+    summary: a.string(),
+  }).authorization(allow => [allow.authenticated()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
